@@ -5,11 +5,11 @@ We are trying to solve the same problem here, by providing describe() API for su
 # How to use API ?
 Using API is very simple, here are the few steps:
 
-## 1. Copy metadata
+### 1. Copy metadata
 Please copy all 2 Apex classes and 1 VF page available in this repository. 
 Don't hate me for not writing the test cases :), this is done intentionally as writing such test cases would require me to either change existing Standard objects or create a new Custom sobject, porting any of these approaches wouldn't be feasible for your org. So please write your own test cases, god bless :)
 
-## 2. Use PicklistDescriber.describe(...) calls
+### 2. Use PicklistDescriber.describe(...) calls
 
 API learning curve is almost 0.001 % (calculated based on black magic), you just need to call describe(..) method and it will handle back you a List<String> having required picklist values. So, one needs to call one of the three describe() methods as shown below:
 
