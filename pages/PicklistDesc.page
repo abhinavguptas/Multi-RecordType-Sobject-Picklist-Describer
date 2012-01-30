@@ -1,0 +1,7 @@
+<apex:page controller="PickListDescController"
+	contentType="application/xml" showHeader="false" sidebar="false"
+	standardStylesheets="false">
+	<apex:form >
+		<apex:inputField value="{!sobj[pickListFieldName]}" />
+	</apex:form>
+</apex:page>
