@@ -11,7 +11,7 @@ Don't hate me for not writing the test cases :), this is done intentionally as w
 
 ## 2. Use PicklistDescriber.describe(...) calls
 
-API learning curve is almost 0.001 % (calculated based on black magic), one needs to call one of the three describe() methods as shown below
+API learning curve is almost 0.001 % (calculated based on black magic), you just need to call describe(..) method and it will handle back you a List<String> having required picklist values. So, one needs to call one of the three describe() methods as shown below:
 
  1. When you have the record id
 
@@ -35,6 +35,6 @@ List<String> options = PicklistDescriber.describe('Account', 'Record_Type_1', 'I
 // 'Record_Type_2' is a sample record type name on Account
 Id recType2Id = [Select Id from RecordType Where SobjectType = 'Account' 
                                             AND DeveloperName like 'Record_Type_2'].Id;
-PicklistDescriber.describe('Account', recType2Id, 'Industry');
+List<String> options = PicklistDescriber.describe('Account', recType2Id, 'Industry');
 ```
 
