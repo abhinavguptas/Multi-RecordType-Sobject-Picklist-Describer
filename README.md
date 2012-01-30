@@ -38,3 +38,6 @@ Id recType2Id = [Select Id from RecordType Where SobjectType = 'Account'
 List<String> options = PicklistDescriber.describe('Account', recType2Id, 'Industry');
 ```
 
+# Internals - How it works ?
+Please relate the repository source with this diagram
+![How it works] (https://docs.google.com/drawings/pub?id=1IUDkz6ug1lxX3AjTVrarwhr1oJg9HVjJ6IL63ABCpSQ&w=1431&h=770)
