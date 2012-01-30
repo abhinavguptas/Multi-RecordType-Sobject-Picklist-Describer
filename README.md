@@ -14,6 +14,7 @@ Don't hate me for not writing the test cases :), this is done intentionally as w
 API learning curve is almost 0.001 % (calculated based on black magic), one needs to call one of the three describe() methods as shown below
 
  1. When you have the record id
+
 ```java
 // Query or Load the Account as required
 Id accountId = [Select Id from Account Where Name = 'Most Paying Customer'];
@@ -21,5 +22,19 @@ Id accountId = [Select Id from Account Where Name = 'Most Paying Customer'];
 List<String> options = PicklistDescriber.describe(accountId, 'Industry');
 ```
 
+ 2. When you know the sobjectType and recordType name 
 
+```java
+// 'Record_Type_1' is a sample record type name on Account
+List<String> options = PicklistDescriber.describe('Account', 'Record_Type_1', 'Industry'));
+```
+
+3. When you know the sobjectType and recordTypeId
+
+```java
+// 'Record_Type_2' is a sample record type name on Account
+Id recType2Id = [Select Id from RecordType Where SobjectType = 'Account' 
+                                            AND DeveloperName like 'Record_Type_2'].Id;
+PicklistDescriber.describe('Account', recType2Id, 'Industry');
+```
 
