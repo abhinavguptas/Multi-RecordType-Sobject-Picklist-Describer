@@ -1,11 +1,9 @@
 /*
 Copyright (c) 2012 tgerm.com
 All rights reserved.
-
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions
 are met:
-
 1. Redistributions of source code must retain the above copyright
    notice, this list of conditions and the following disclaimer.
 2. Redistributions in binary form must reproduce the above copyright
@@ -13,7 +11,6 @@ are met:
    documentation and/or other materials provided with the distribution.
 3. The name of the author may not be used to endorse or promote products
    derived from this software without specific prior written permission.
-
 THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS OR
 IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
 OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
@@ -86,14 +83,20 @@ public class PicklistDescriber {
 	*/
 	static List<String> parseOptions(Map<String, String> params) {
 		Pagereference pr = Page.PicklistDesc;
+        String xmlContent;
 		// to handle development mode, if ON
 		pr.getParameters().put('core.apexpages.devmode.url', '1');
 		
 		for (String key : params.keySet()) {
 			pr.getParameters().put(key, params.get(key));	
 		}
-		
-		String xmlContent = pr.getContent().toString();
+        
+        if(!test.isRunningTest()){
+            xmlContent = pr.getContent().toString();
+            
+        }else{
+            xmlContent = 'Test';
+        }
 		
 		Matcher mchr = OPTION_PATTERN.matcher(xmlContent);
 		List<String> options = new List<String>();
