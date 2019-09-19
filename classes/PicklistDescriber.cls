@@ -32,7 +32,9 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	@author Abhinav 
 */
 public class PicklistDescriber {
-	static final Pattern OPTION_PATTERN = Pattern.compile('<option.+?>(.+?)</option>'); 
+	static final Pattern OPTION_PATTERN = Pattern.compile('<option.+?>(.+?)</option>');
+	@TestVisible
+    private static String TEST_XML_CONTENT = '';
 	
 	/**
 		Desribe a picklist field for an sobject id. RecordType is automatically picked
@@ -86,14 +88,25 @@ public class PicklistDescriber {
 	*/
 	static List<String> parseOptions(Map<String, String> params) {
 		Pagereference pr = Page.PicklistDesc;
+		Blob content;
 		// to handle development mode, if ON
 		pr.getParameters().put('core.apexpages.devmode.url', '1');
 		
 		for (String key : params.keySet()) {
 			pr.getParameters().put(key, params.get(key));	
 		}
+		/*
+         As getContent() is treated as a HTTP call out and and is not supported by test classes so we create
+         TEST_XML_CONTENT where we store the response for the test classes.
+        */
+        if (Test.IsRunningTest()) {
+            content=Blob.valueOf(TEST_XML_CONTENT);
+         }
+        else {
+            content=pr.getContent();
+        }
 		
-		String xmlContent = pr.getContent().toString();
+		String xmlContent = content.toString();
 		
 		Matcher mchr = OPTION_PATTERN.matcher(xmlContent);
 		List<String> options = new List<String>();
